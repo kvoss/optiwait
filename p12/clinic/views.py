@@ -10,8 +10,12 @@ from clinic.models import Clinic
 import twitter
 from dateutil.parser import parse
 
+import re
+
 class TweetError(Exception):
     pass
+
+PATTERN = re.compile(r'(\d+) min')
 
 CONSUMER_KEY = 'lMk5wnSsEqRFqB6wTyQ00TlLk'
 CONSUMER_SECRET ='A0XRy7zkgFej4fnTNqbKLF4QOhIRU6ygIul00JVYGE84BpPsO5'
@@ -38,7 +42,8 @@ def get_time(tt_id):
         raise TweetError
     else:
         ret = get_msgs(tt_id)
-    return ret['update']
+    return (ret['update'], ret['msg'])
+
 
 def index(req):
     clinics = Clinic.objects.all()
@@ -48,11 +53,21 @@ def index(req):
     for cl in clinics:
         # updating the DB
         try:
-            t = get_time(cl.twitter)
+            t, txt = get_time(cl.twitter)
+
+            sre = PATTERN.search(txt)
+            print txt
+            if sre:
+                mins = sre.groups(1)
+                mins = int( mins[0])
+            else:
+                mins = 60
+
             print '[!]>> ', cl.name, t
             print '[!]>> ', cl.name, cl.last_update
-            if t > cl.last_update:
+            if t >= cl.last_update:
                 cl.last_update = t
+                cl.est_wait_min = mins
                 cl.save()
         except TweetError:
             pass
