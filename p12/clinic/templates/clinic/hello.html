@@ -23,12 +23,24 @@
 			</form>
 			<div class="inner">
 				<ol class="clinics">
+					<li class="listheader">
+						<table>
+							<tr>
+								<td class="name">Clinic</td>
+								<td class="waittime">Wait Time</td>
+								<td class="contact">Contact</td>
+								<td class="times">Hours</td>
+								<td class="distance">Distance</td>
+								<td class="map">Map</map>
+							</tr>
+						</table>
+					</li>
 				{% for clinic in clinics %}
 					<li>
 						<table>
 							<tr>
 								<td class="name">{{ clinic.name }}</td>
-								<td class="waittime">{{ clinic.waiting }}</td>
+								<td class="waittime">{{ clinic.waiting }} min</td>
 								<td class="contact">
 									<ol>
 										<li>{{ clinic.phone }}</li>
