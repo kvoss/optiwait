@@ -10,16 +10,20 @@ from clinic.models import Clinic
 def index(req):
     clinics = Clinic.objects.all()
 
-    2h = timedelta(hours=2)
+    hours2 = timedelta(hours=2)
 
     for cl in clinics:
-        datetime(cl.last_update)
+        cl.last_update
         dt = timedelta(minutes=cl.est_wait_min)
 
-        datetime.now()
-
-        cl.waiting = 40
-
+        now = datetime.now()
+        now = now.replace(tzinfo=None)
+        lu = cl.last_update
+        lu = lu.replace(tzinfo=None)
+        if now - (lu + dt) > hours2:
+            cl.waiting = 'unknown'
+        else:
+            cl.waiting = int(dt.seconds) / 60
 
 
     ctx = { 'clinics': clinics,
