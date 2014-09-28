@@ -136,7 +136,7 @@ td {
 }
 
 td.name {
-	width:20%;
+	width:23%;
 	font-weight:700;
 	padding-left:25px;
 }
@@ -159,7 +159,7 @@ td.distance {
 }
 
 td.map {
-	width:10%;
+	width:7%;
 	text-align:center;
 }
 
