@@ -1,0 +1,110 @@
+* {
+	box-sizing: border-box;
+}
+
+html {
+	background:url(../img/bg1.jpg) no-repeat center center fixed; 
+	-webkit-background-size:cover;
+	-moz-background-size:cover;
+	-o-background-size:cover;
+	background-size:cover;
+	min-width:650px;
+}
+
+.header {
+	width:100%;
+	padding-top:50px;
+	padding-bottom:80px;
+}
+
+.header img {
+	width:40%;
+	max-width:1665px;
+	display:block;
+	margin:0 auto;
+}
+
+.container {
+	width:100%;
+	font-family:"HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+}
+
+.inner {
+	width:70%;
+	margin:0 auto;
+	font-family:"HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+}
+
+.container form {
+	width:70%;
+	margin:0 auto;
+}
+
+.container form input {
+	padding:0;
+	margin:0;
+	border:0;
+	font-family:"HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+	font-size:2em;
+	font-weight:700;
+}
+
+.container form input[type=text] {
+	width:80%;
+	padding:10px;
+}
+
+.container form input[type=submit] {
+	width:17%;
+	min-width:75px;
+	padding:10px;
+	margin-left:3%;
+	background:#C61E1E;
+	color:#fff;
+}
+
+.container form input[type=submit]:hover {
+	background:#3B6B25;
+}
+
+.container form input[type=submit]:active {
+	background:#558C3B;
+}
+
+.container .inner h1 {
+	font-weight:700;
+}
+
+.container .inner p {
+	font:inherit;
+}
+
+.container .inner ul {
+	font:inherit;
+}
+
+.container .inner li {
+	font:inherit;
+}
+
+.container .inner a {
+	font:inherit;
+	color:#3B6B25;
+}
+
+.container .inner a:hover {
+	color:#558C3B;
+}
+
+@media only screen and (min-width:961px) and (max-width:1280px) {
+	.container form input {
+		font-size:1.3em;
+	}
+}
+
+@media only screen and (max-width:960px) {
+	.container form input {
+		font-size:1em;
+		font-weight:400;
+	}
+}

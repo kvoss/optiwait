@@ -1,20 +1,45 @@
-<html>
-<head>
-    <title>Clinic view</title>
-</head>
-<body>
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<meta name="description" content="">
+		<meta name="author" content="">
+		<link rel="icon" href="">
 
-<h1>OptiWait</h1>
-
-<form>
-    <input type='text'></input>
-</form>
-<ol>
-{% for clinic in clinics %}
-    <li> {{ clinic.name }} </li>
-{% endfor %}
-</ol>
-
-</body>
+		<title>OptiWait</title>
+		
+		<link href="css/reset.css" rel="stylesheet">
+		<link href="css/style.css" rel="stylesheet">
+	</head>
+	<body>
+		<div class="header"><img src="img/optiwait_dark.png" alt="OptiWait"></div>
+		<div class="container">	
+			<form>
+				<input type="text" placeholder="Type in your city"></input><input type="submit" value="Search">
+			</form>
+			<div class="inner">
+				<ol>
+				{% for clinic in clinics %}
+					<li> {{ clinic.name }} </li>
+				{% endfor %}
+				</ol>
+				<h1>When to use the Emergency Department</h1>
+				<p>Please use the emergency department for true emergencies and urgent medical conditions only, including:</p>
+				<ul>
+					<li>​sudden chest pain</li>
+					<li>breathing problems</li>
+					<li>possible broken bones</li>
+					<li>head injuries</li>
+					<li>​eye injuries</li>
+					<li>sudden and severe headache</li>
+					<li>illness or injury involving children or infants</li>
+				</ul>
+				<p>For all other illnesses, please contact a medical professional or the provincial <strong>HealthLine</strong> by phone at <strong>811</strong> or online at <a href="www.healthlineonline.ca">www.healthlineonline.ca</a> for expert medical advice anytime.</p>
+			</div>
+		</div>
+	</body>
 </html>
 
