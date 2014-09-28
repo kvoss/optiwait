@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+{% load staticfiles %}
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 		<meta charset="utf-8">
@@ -11,11 +12,11 @@
 
 		<title>OptiWait</title>
 		
-		<link href="css/reset.css" rel="stylesheet">
-		<link href="css/style.css" rel="stylesheet">
+		<link href="{% static "css/reset.css" %}" rel="stylesheet">
+		<link href="{% static "css/style.css" %}" rel="stylesheet">
 	</head>
 	<body>
-		<div class="header"><img src="img/optiwait_dark.png" alt="OptiWait"></div>
+        <div class="header"><img src="{% static "img/optiwait_dark.png" %}" alt="OptiWait"></div>
 		<div class="container">	
 			<form>
 				<input type="text" placeholder="Type in your city"></input><input type="submit" value="Search">
