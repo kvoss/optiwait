@@ -123,6 +123,10 @@ table:hover {
 	background:#558C3B;
 }
 
+.listheader table:hover {
+	background:#3B6B25;
+}
+
 td {
 	font-family:"HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
 	font-size:1.3em;
@@ -131,21 +135,39 @@ td {
 	vertical-align:middle;
 }
 
-td.map {
-	width:100px;
-}
-
-td.map img {
-	width:100px;
-}
-
 td.name {
+	width:20%;
 	font-weight:700;
+	padding-left:25px;
 }
 
 td.waittime {
+	width:15%;
 	font-weight:700;
 }
+
+td.contact {
+	width:25%;
+}
+
+td.times {
+	width:20%;
+}
+
+td.distance {
+	width:10%;
+}
+
+td.map {
+	width:10%;
+	text-align:center;
+}
+
+td.map img {
+	width:100%;
+}
+
+
 
 .container .inner table ol li {
 	font-family:"HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
@@ -156,11 +178,19 @@ td.waittime {
 	.container form input {
 		font-size:1.3em;
 	}
+	
+	td {
+		font-size:1em;
+	}
 }
 
 @media only screen and (max-width:960px) {
 	.container form input {
 		font-size:1em;
 		font-weight:400;
+	}
+	
+	td {
+		font-size:0.8em;
 	}
 }
