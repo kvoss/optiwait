@@ -73,6 +73,11 @@ html {
 	background:#558C3B;
 }
 
+.info {
+	font-family:"HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+	padding:0 25px 40px 25px;
+}
+
 .container .inner h1 {
 	font:inherit;
 	font-weight:700;
@@ -87,13 +92,13 @@ html {
 
 .container .inner ul {
 	font:inherit;
-	font-size:1.3em;
 	list-style-type:disc;
 	padding:15px 0 15px 20px;
 }
 
 .container .inner ul li {
-	font:inherit;
+	font-family:inherit;
+	font-size:1.3em;
 }
 
 .container .inner a {
@@ -167,8 +172,6 @@ td.map img {
 	width:100%;
 }
 
-
-
 .container .inner table ol li {
 	font-family:"HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
 	color:#fff;
@@ -182,6 +185,18 @@ td.map img {
 	td {
 		font-size:1em;
 	}
+	
+	.container .inner h1 {
+		font-size:1.5em;
+	}
+	
+	.container .inner p {
+		font-size:1em;
+	}
+	
+	.container .inner ul li {
+		font-size:1em;
+	}
 }
 
 @media only screen and (max-width:960px) {
@@ -191,6 +206,18 @@ td.map img {
 	}
 	
 	td {
+		font-size:0.8em;
+	}
+	
+	.container .inner h1 {
+		font-size:1.3em;
+	}
+	
+	.container .inner p {
+		font-size:0.8em;
+	}
+	
+	.container .inner ul li {
 		font-size:0.8em;
 	}
 }
