@@ -1,0 +1,20 @@
+<html>
+<head>
+    <title>Clinic view</title>
+</head>
+<body>
+
+<h1>OptiWait</h1>
+
+<form>
+    <input type='text'></input>
+</form>
+<ol>
+{% for clinic in clinics %}
+    <li> {{ clinic.name }} </li>
+{% endfor %}
+</ol>
+
+</body>
+</html>
+
