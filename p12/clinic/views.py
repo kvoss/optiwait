@@ -15,7 +15,8 @@ import re
 class TweetError(Exception):
     pass
 
-PATTERN = re.compile(r'(\d+) min')
+PATTERN = re.compile(r'(\d+) [Mm]in')
+PATTERNH = re.compile(r'(\d+) [Hh]our')
 
 CONSUMER_KEY = 'lMk5wnSsEqRFqB6wTyQ00TlLk'
 CONSUMER_SECRET ='A0XRy7zkgFej4fnTNqbKLF4QOhIRU6ygIul00JVYGE84BpPsO5'
@@ -56,10 +57,14 @@ def index(req):
             t, txt = get_time(cl.twitter)
 
             sre = PATTERN.search(txt)
-            print txt
+            sreh = PATTERNH.search(txt)
+            #print txt
             if sre:
                 mins = sre.groups(1)
                 mins = int( mins[0])
+            elif sreh:
+                hours = sreh.groups(1)
+                mins = int(hours[0]) * 60
             else:
                 mins = 60
 
@@ -86,6 +91,9 @@ def index(req):
         else:
             cl.waiting = int(dt.seconds) / 60
 
+    #clinics = sorted(clinics, lambda x,y: x.est_wait_min < y.est_wait_min)
+    #clinics = Clinic.objects.all().order_by('est_wait_min')
+    #clinics.order_by('est_wait_min')
 
     ctx = { 'clinics': clinics,
     }
