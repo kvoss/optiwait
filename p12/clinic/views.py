@@ -1,14 +1,13 @@
 from datetime import timedelta, time, datetime
+from dateutil.parser import parse
+from django.utils import timezone
 
 from django.shortcuts import render
 from django.http import HttpResponse
 
-from django.utils import timezone
-
 from clinic.models import Clinic
 
 import twitter
-from dateutil.parser import parse
 
 import re
 
@@ -38,7 +37,7 @@ def get_msgs(clinic_id):
     return ret
 
 
-def get_time(tt_id):
+def get_update(tt_id):
     if tt_id == '':
         raise TweetError
     else:
@@ -46,15 +45,14 @@ def get_time(tt_id):
     return (ret['update'], ret['msg'])
 
 
+HOUR = timedelta(hours=1)
+
 def index(req):
     clinics = Clinic.objects.all()
 
-    hours2 = timedelta(hours=2)
-
     for cl in clinics:
-        # updating the DB
         try:
-            t, txt = get_time(cl.twitter)
+            t, txt = get_update(cl.twitter)
 
             sre = PATTERN.search(txt)
             sreh = PATTERNH.search(txt)
@@ -70,7 +68,9 @@ def index(req):
 
             print '[!]>> ', cl.name, t
             print '[!]>> ', cl.name, cl.last_update
+
             if t >= cl.last_update:
+                # updating the DB
                 cl.last_update = t
                 cl.est_wait_min = mins
                 cl.save()
@@ -78,15 +78,15 @@ def index(req):
             pass
 
         dt = timedelta(minutes=cl.est_wait_min)
-
-        now = datetime.now()
-        now = now.replace(tzinfo=None)
-
-        # last update
         lu = cl.last_update
-        lu = lu.replace(tzinfo=None)
 
-        if (now - (lu + dt)) > hours2:
+        now = timezone.now()
+
+        # if no update in the past 8 hours
+        #  assumes a clinic works 8 hours and posted update first time in the
+        #  morning.
+        # XXX: this perios should be shortened but I dont like seeing 'unknown'
+        if (now - (lu + dt)) > (8 * HOUR):
             cl.waiting = 'unknown'
         else:
             cl.waiting = int(dt.seconds) / 60
