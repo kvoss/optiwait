@@ -81,24 +81,18 @@ def index(req):
 
         now = datetime.now()
         now = now.replace(tzinfo=None)
+
         # last update
         lu = cl.last_update
         lu = lu.replace(tzinfo=None)
 
-
-        if now - (lu + dt) > hours2:
+        if (now - (lu + dt)) > hours2:
             cl.waiting = 'unknown'
         else:
             cl.waiting = int(dt.seconds) / 60
 
-    #clinics = sorted(clinics, lambda x,y: x.est_wait_min < y.est_wait_min)
-    #clinics = Clinic.objects.all().order_by('est_wait_min')
-    #clinics.order_by('est_wait_min')
-
-    ctx = { 'clinics': clinics,
+    ctx = { 'clinics': sorted(clinics, key=lambda x: x.waiting),
     }
 
-
     return render(req, 'clinic/hello.html', ctx)
-
 
