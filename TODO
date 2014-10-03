@@ -1,0 +1,42 @@
+# General TODO
+
+
+* giving distance and also eqivalent in minutes
+
+* preficting future??
+    give me a location, and I'll tell you how long youll wait when you get there
+        * strong trends around certain hours in certain regions?
+
+* visit time depending on 
+    * the size of the clinic 
+    * number of doctors in the clinic
+    
+    and the current waiting time.
+
+## updater
+
+* if update is newer than 5 mintues dont reach twitter
+* plugins for connectors
+
+* collecting old data 
+    * generate estimates??
+    * analyse??
+
+
+## DB
+
+* valid flag next to a clinic, not all should be displayed
+* selecting clinics with a method defined in model
+
+
+## visual
+
+* chart of waiting hours
+
+
+## marketing
+
+* how many people a day use it
+* whats their age distribution
+* easying life for emergency
+
