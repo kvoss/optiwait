@@ -1,4 +1,4 @@
-import json
+#import json
 import re
 
 import twitter
@@ -26,25 +26,27 @@ auth = twitter.oauth.OAuth(OAUTH_TOKEN, OAUTH_TOKEN_SECRET,
 twitter_api = twitter.Twitter(auth=auth)
 
 def get_msgs(clinic_id):
-    #tt =  twitter_api.statuses.user_timeline(screen_name=clinic_id)
-    #for msg in tt:
-    #    print json.dumps(msg['text'], indent=1)
 
     tts =  twitter_api.statuses.user_timeline(screen_name=clinic_id)
+    #for msg in tts:
+    #    print json.dumps(msg['text'], indent=2)
     msg = tts[0]
     dt = parse(msg['created_at'])
 
-    #ret = {'update' : dt, 'msg': msg['text'] }
     ret = (dt, msg['text'])
-
     return ret
 
 
 def get_update(tt_id):
-    if tt_id == '':
-        raise TweetError
-    else:
+    DEFAULT_WAIT = 60
+
+    try:
         t, txt = get_msgs(tt_id)
+    except IndexError:
+        raise TweetError
+    except Exception, e: #XXX: catch other exceptions and report
+        print '[!]>> EXCEPTION: ', e
+        raise TweetError
 
     sre = PATTERN.search(txt)
     sreh = PATTERNH.search(txt)
@@ -56,7 +58,7 @@ def get_update(tt_id):
         hours = sreh.groups(1)
         mins = int(hours[0]) * 60
     else:
-        mins = 60
+        mins = DEFAULT_WAIT
 
     return (t, mins)
 

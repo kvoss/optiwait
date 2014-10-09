@@ -2,7 +2,7 @@ from datetime import timedelta, time, datetime
 from django.utils import timezone
 
 from django.shortcuts import render
-from django.http import HttpResponse
+#from django.http import HttpResponse
 
 from clinic.models import Clinic
 from clinic.tweets import get_update, TweetError
