@@ -12,7 +12,8 @@ from clinic.distance import get_distances
 HOUR = timedelta(hours=1)
 
 class LocationForm(forms.Form):
-    location = forms.CharField(max_length=70) #, attrs={'placeholder': 'Type in your city'})
+    location = forms.CharField(max_length=70) 
+    #, attrs={'placeholder': 'Type in your city'})
 
 def index(req):
 
