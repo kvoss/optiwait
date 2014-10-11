@@ -3,6 +3,7 @@ from django.utils import timezone
 
 from django.shortcuts import render
 #from django.http import HttpResponse
+from django import forms
 
 from clinic.models import Clinic
 from clinic.tweets import get_update, TweetError
@@ -10,10 +11,15 @@ from clinic.distance import get_distances
 
 HOUR = timedelta(hours=1)
 
+class LocationForm(forms.Form):
+    location = forms.CharField(max_length=70) #, attrs={'placeholder': 'Type in your city'})
+
 def index(req):
 
     # XXX: this should be read from the req
-    LOCATION = 'Saskatoon'
+    LOCATION = '701 5th Ave N, Saskatoon'
+    if req.method == 'POST' and 'location' in req.POST and req.POST['location']:
+        LOCATION = req.POST['location']
 
     now = timezone.now()
 
@@ -50,7 +56,10 @@ def index(req):
     for c, d in zip(clinics, dstns):
         c.distance = d[1]
 
-    ctx = { 'clinics': sorted(clinics, key=lambda x: x.waiting), }
+    ctx = { 
+            'clinics': sorted(clinics, key=lambda x: x.waiting), 
+            #'form' : LocationForm(),
+    }
 
     return render(req, 'clinic/hello.html', ctx)
 

@@ -1,76 +1,77 @@
 <!DOCTYPE html>
 <html lang="en">
 {% load staticfiles %}
-	<head>
-		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-		<meta charset="utf-8">
-		<meta http-equiv="X-UA-Compatible" content="IE=edge">
-		<meta name="viewport" content="width=device-width, initial-scale=1">
-		<meta name="description" content="">
-		<meta name="author" content="">
-		<link rel="icon" href="">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="description" content="">
+        <meta name="author" content="">
+        <link rel="icon" href="">
 
-		<title>OptiWait</title>
-		
-		<link href="{% static "css/reset.css" %}" rel="stylesheet">
-		<link href="{% static "css/style.css" %}" rel="stylesheet">
-	</head>
-	<body>
+        <title>OptiWait</title>
+        
+        <link href="{% static "css/reset.css" %}" rel="stylesheet">
+        <link href="{% static "css/style.css" %}" rel="stylesheet">
+    </head>
+    <body>
         <div class="header"><img src="{% static "img/optiwait_dark.png" %}" alt="OptiWait"></div>
-		<div class="container">	
-			<form>
-				<input type="text" placeholder="Type in your city"></input><input type="submit" value="Search">
-			</form>
-			<div class="inner">
-				<ol class="clinics">
-					<li class="listheader">
-						<table>
-							<tr>
-								<td class="name">Clinic</td>
-								<td class="waittime">Wait Time</td>
-								<td class="contact">Contact</td>
-								<td class="times">Hours</td>
-								<td class="distance">Distance</td>
-								<td class="map">Map</map>
-							</tr>
-						</table>
-					</li>
-				{% for clinic in clinics %}
-					<li>
-						<table>
-							<tr>
-								<td class="name">{{ clinic.name }}</td>
-								<td class="waittime">{{ clinic.waiting }} min</td>
-								<td class="contact">
-									<ol>
-										<li>{{ clinic.phone }}</li>
-										<li>{{ clinic.location }}</li>
-									</ol>
-								</td>
-								<td class="times">8:00am - 8:00pm</td>
+        <div class="container"> 
+            <form action="/clinic/" method="post">
+                {% csrf_token %}
+                <input type="text" name="location" placeholder="Type in your city"></input><input type="submit" value="Search">
+            </form>
+            <div class="inner">
+                <ol class="clinics">
+                    <li class="listheader">
+                        <table>
+                            <tr>
+                                <td class="name">Clinic</td>
+                                <td class="waittime">Wait Time</td>
+                                <td class="contact">Contact</td>
+                                <td class="times">Hours</td>
+                                <td class="distance">Distance</td>
+                                <td class="map">Map</map>
+                            </tr>
+                        </table>
+                    </li>
+                    {% for clinic in clinics %}
+                    <li>
+                        <table>
+                            <tr>
+                                <td class="name">{{ clinic.name }}</td>
+                                <td class="waittime">{{ clinic.waiting }} min</td>
+                                <td class="contact">
+                                    <ol>
+                                        <li>{{ clinic.phone }}</li>
+                                        <li>{{ clinic.location }}</li>
+                                    </ol>
+                                </td>
+                                <td class="times">8:00am - 8:00pm</td>
                                 <td class="distance">{{ clinic.distance }}</td>
-								<td class="map"><a href=""><img src="{% static "img/mapicon.png" %}" alt="Find on map"></a></map>
-							</tr>
-						</table>
-					</li>
-				{% endfor %}
-				</ol>				
-				<div class="info">
-					<h1>When to use the Emergency Department</h1>
-					<p>Please use the emergency department for true emergencies and urgent medical conditions only, including:</p>
-					<ul>
-						<li>​sudden chest pain</li>
-						<li>breathing problems</li>
-						<li>possible broken bones</li>
-						<li>head injuries</li>
-						<li>​eye injuries</li>
-						<li>sudden and severe headache</li>
-						<li>illness or injury involving children or infants</li>
-					</ul>
-					<p>For all other illnesses, please contact a medical professional or the provincial <strong>HealthLine</strong> by phone at <strong>811</strong> or online at <a href="www.healthlineonline.ca">www.healthlineonline.ca</a> for expert medical advice anytime.</p>
-				</div>
-			</div>
-		</div>
-	</body>
+                                <td class="map"><a href=""><img src="{% static "img/mapicon.png" %}" alt="Find on map"></a></map>
+                            </tr>
+                        </table>
+                    </li>
+                {% endfor %}
+                </ol>               
+                <div class="info">
+                    <h1>When to use the Emergency Department</h1>
+                    <p>Please use the emergency department for true emergencies and urgent medical conditions only, including:</p>
+                    <ul>
+                        <li>​sudden chest pain</li>
+                        <li>breathing problems</li>
+                        <li>possible broken bones</li>
+                        <li>head injuries</li>
+                        <li>​eye injuries</li>
+                        <li>sudden and severe headache</li>
+                        <li>illness or injury involving children or infants</li>
+                    </ul>
+                    <p>For all other illnesses, please contact a medical professional or the provincial <strong>HealthLine</strong> by phone at <strong>811</strong> or online at <a href="www.healthlineonline.ca">www.healthlineonline.ca</a> for expert medical advice anytime.</p>
+                </div>
+            </div>
+        </div>
+    </body>
 </html>
 
