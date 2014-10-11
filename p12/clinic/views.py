@@ -6,10 +6,14 @@ from django.shortcuts import render
 
 from clinic.models import Clinic
 from clinic.tweets import get_update, TweetError
+from clinic.distance import get_distances
 
 HOUR = timedelta(hours=1)
 
 def index(req):
+
+    # XXX: this should be read from the req
+    LOCATION = 'Saskatoon'
 
     now = timezone.now()
 
@@ -40,6 +44,11 @@ def index(req):
             cl.waiting = 'unknown'
         else:
             cl.waiting = int(dt.seconds) / 60
+
+    clocations = map(lambda c: c.location, clinics)
+    dstns = get_distances(LOCATION, clocations)
+    for c, d in zip(clinics, dstns):
+        c.distance = d[1]
 
     ctx = { 'clinics': sorted(clinics, key=lambda x: x.waiting), }
 
