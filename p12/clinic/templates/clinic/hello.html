@@ -20,7 +20,11 @@
         <div class="container"> 
             <form action="/clinic/" method="post">
                 {% csrf_token %}
+                {% if location %}
+                <input type="text" name="location" placeholder="{{ location }}"</input><input type="submit" value="Search">
+                {% else %}
                 <input type="text" name="location" placeholder="Type in your city"></input><input type="submit" value="Search">
+                {% endif %}
             </form>
             <div class="inner">
                 <ol class="clinics">

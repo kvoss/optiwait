@@ -17,7 +17,8 @@ HOUR = timedelta(hours=1)
 def index(req):
 
     # XXX: this should be read from the req
-    LOCATION = '701 5th Ave N, Saskatoon'
+    #LOCATION = '701 5th Ave N, Saskatoon'
+    LOCATION = ''
     if req.method == 'POST':
         if 'location' in req.POST:
             LOCATION = req.POST['location']
@@ -49,6 +50,7 @@ def index(req):
     # Fill placeholders in the template 
     ctx = {'clinics': sorted(clinics, key=lambda x: x.waiting), 
            #'form' : LocationForm(), 
+           'location' : LOCATION,
     }
     return render(req, 'clinic/hello.html', ctx)
 
