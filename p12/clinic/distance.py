@@ -39,10 +39,13 @@ def get_raw_distances(loc, clinics):
         'key' : API_KEY,
         })
 
-    #print params
-    response = urllib2.urlopen('?'.join([URL, params])).read()
-    ret = json.loads(response)
-    distances = zip(clinics, ret['rows'][0]['elements'])
+    try:
+        response = urllib2.urlopen('?'.join([URL, params])).read()
+        ret = json.loads(response)
+        distances = zip(clinics, ret['rows'][0]['elements'])
+    except IndexError:
+        distances = []
+
     return distances
 
 def get_distances(loc, clinics):

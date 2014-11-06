@@ -19,12 +19,13 @@ def index(req):
     # XXX: this should be read from the req
     LOCATION = '701 5th Ave N, Saskatoon'
     if req.method == 'POST':
-        if 'location' in req.POST and req['location']:
+        if 'location' in req.POST:
             LOCATION = req.POST['location']
 
     now = timezone.now()
 
-    clinics = Clinic.objects.all()
+    #clinics = Clinic.get_allvalid()
+    clinics = Clinic.objects.filter(valid=True).all()
     for cl in clinics:
         cl.refresh()
         dt = timedelta(minutes=cl.est_wait_min)

@@ -14,6 +14,7 @@ class Clinic(models.Model):
 
     last_update = models.DateTimeField(blank=True)
     est_wait_min = models.IntegerField(blank=True)
+    valid = models.BooleanField(default=False)
 
     def __str__(self):
         return self.name
@@ -31,6 +32,10 @@ class Clinic(models.Model):
                 self.save()
         except TweetError:
             pass
+
+    #def get_allvalid(self):
+    #    clinics = Clinic.objects.filter(valid=True)
+    #    return clinics
 
 
 class Doctor(models.Model):
