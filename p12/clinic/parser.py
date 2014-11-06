@@ -3,11 +3,16 @@ import unittest
 
 # from dateutil.parser import parse
 
+import logging
+
+logger = logging.getLogger(__name__)
 
 __all__ = ['Parser']
 
 PATTERN = re.compile(r'(\d+)\s*min')
-PATTERNH = re.compile(r'(\d+)\s*(hour|hr )')
+
+PATTERNH = re.compile(r'(\d+)\s*(hour|hr)')
+PATTERN1H = re.compile(r'\b(one|an)\s+(hour|hr)\b')
 
 class Parser(object):
 
@@ -15,10 +20,11 @@ class Parser(object):
         self.txt = txt.lower()
 
     def get_minutes(self):
-        DEFAULT_WAIT = 60
+        DEFAULT_WAIT = 66
 
         sre = PATTERN.search(self.txt)
         sreh = PATTERNH.search(self.txt)
+        sre1h = PATTERN1H.search(self.txt)
         #print txt
         if sre:
             mins = sre.groups(1)
@@ -26,8 +32,11 @@ class Parser(object):
         elif sreh:
             hours = sreh.groups(1)
             mins = int(hours[0]) * 60
+        elif sre1h:
+            mins = 60
         else:
             mins = DEFAULT_WAIT
+            logger.debug('default wait: ' + self.txt)
 
         return mins
 
