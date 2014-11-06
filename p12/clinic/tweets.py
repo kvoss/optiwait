@@ -1,7 +1,8 @@
 #import json
 import re
-
 import twitter
+
+from clinic.parser import Parser
 from dateutil.parser import parse
 
 # XXX: Go to http://dev.twitter.com/apps/new to create an app and get values   
@@ -17,9 +18,6 @@ CONSUMER_KEY = 'lMk5wnSsEqRFqB6wTyQ00TlLk'
 CONSUMER_SECRET ='A0XRy7zkgFej4fnTNqbKLF4QOhIRU6ygIul00JVYGE84BpPsO5'
 OAUTH_TOKEN = '2835226370-1kIFZSqIsw9obeEFPGlkFhj3vwpSLna4aVcrCYK'
 OAUTH_TOKEN_SECRET = 'NfAQTO3S2bQV4t95L6u3L71oZmtbhzjcfT9BXbgsjQ1fZ'
-
-PATTERN = re.compile(r'(\d+) [Mm]in')
-PATTERNH = re.compile(r'(\d+) [Hh]our')
 
 auth = twitter.oauth.OAuth(OAUTH_TOKEN, OAUTH_TOKEN_SECRET,
                            CONSUMER_KEY, CONSUMER_SECRET)
@@ -48,17 +46,7 @@ def get_update(tt_id):
         print '[!]>> EXCEPTION: ', e
         raise TweetError
 
-    sre = PATTERN.search(txt)
-    sreh = PATTERNH.search(txt)
-    #print txt
-    if sre:
-        mins = sre.groups(1)
-        mins = int( mins[0])
-    elif sreh:
-        hours = sreh.groups(1)
-        mins = int(hours[0]) * 60
-    else:
-        mins = DEFAULT_WAIT
+    mins = Parser(txt).get_minutes()
 
     return (t, mins)
 
