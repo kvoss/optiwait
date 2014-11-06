@@ -1,5 +1,6 @@
-from datetime import timedelta
-from django.utils import timezone
+from datetime import timedelta, time
+from django.utils import timezone as dtz
+from pytz import utc
 
 from django.shortcuts import render
 #from django.http import HttpResponse
@@ -9,6 +10,9 @@ from clinic.models import Clinic
 from clinic.distance import get_distances
 
 HOUR = timedelta(hours=1)
+
+EightAM = time(hour=14, tzinfo=utc)
+EightPM = time(hour=2, tzinfo=utc)
 
 #class LocationForm(forms.Form):
 #    location = forms.CharField(max_length=70) 
@@ -23,7 +27,7 @@ def index(req):
         if 'location' in req.POST:
             LOCATION = req.POST['location']
 
-    now = timezone.now()
+    now = dtz.now()
 
     #clinics = Clinic.get_allvalid()
     clinics = Clinic.objects.filter(valid=True).all()
@@ -36,10 +40,12 @@ def index(req):
         #  assumes a clinic works 8 hours and posted update first time in the
         #  morning.
         # XXX: this perios should be shortened but I dont like seeing 'unknown'
-        if (now - (lu + dt)) > (8 * HOUR):
-            cl.waiting = 'unknown'
+        if EightPM < now.timetz() and now.timetz() < EightAM:
+            cl.waiting = 'Closed'
+        elif (now - (lu + dt)) > (8 * HOUR):
+            cl.waiting = 'Unknown'
         else:
-            cl.waiting = int(dt.seconds) / 60
+            cl.waiting = '%d min'%(int(dt.seconds) / 60)
 
     #  Add information about distances
     clocations = map(lambda c: c.location, clinics)
