@@ -1,6 +1,9 @@
 from django.db import models
+from clinic.tweets import get_update, TweetError
 
-# Create your models here.
+import logging
+
+logger = logging.getLogger(__name__)
 
 class Clinic(models.Model):
     name = models.CharField(max_length=100)
@@ -16,7 +19,18 @@ class Clinic(models.Model):
         return self.name
 
     # adding additional many-to-many realationship with working hours
-    # for now logic assumer 9-5
+
+    def refresh(self):
+        try:
+            t, mins = get_update(self.twitter)
+            logger.info(' '.join([self.name, str(self.last_update), str(t)]))
+
+            if t > self.last_update:
+                self.last_update = t
+                self.est_wait_min = mins
+                self.save()
+        except TweetError:
+            pass
 
 
 class Doctor(models.Model):
@@ -24,7 +38,6 @@ class Doctor(models.Model):
     notes = models.CharField(max_length=1000, blank=True)
 
     clinic = models.ForeignKey(Clinic)
-
 
     def __str__(self):
         return self.name

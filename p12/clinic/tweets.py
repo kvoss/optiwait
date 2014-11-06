@@ -36,11 +36,9 @@ def get_msgs(clinic_id):
 
 
 def get_update(tt_id):
-    DEFAULT_WAIT = 60
-
     try:
         t, txt = get_msgs(tt_id)
-    except IndexError:
+    except IndexError: # XXX: this is super ugly, why IndexError???
         raise TweetError
     except Exception, e: #XXX: catch other exceptions and report
         print '[!]>> EXCEPTION: ', e
