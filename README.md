@@ -1,6 +1,9 @@
 # optiwait
 
-optiwait is a Django app that provides:
+optiwait provides estimated waiting times for walk-in clinics.
+The estimated waiting time is based on wait time provided by clinics via twitter,
+and on the distance to available clinics.
+The web interface and data model are based on Django.
 
 ## Quick start
 
@@ -20,4 +23,3 @@ optiwait is a Django app that provides:
 4. Start the development server and visit `http://127.0.0.1:8000/clinic`.
 
 5. Visit `http://127.0.0.1:8000/clinic/stats` to display stats.
-
