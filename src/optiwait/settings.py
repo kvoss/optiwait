@@ -1,5 +1,5 @@
 """
-Django settings for p12 project.
+Django settings for optiwait project.
 
 For more information on this file, see
 https://docs.djangoproject.com/en/1.7/topics/settings/
@@ -49,9 +49,9 @@ MIDDLEWARE_CLASSES = (
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 )
 
-ROOT_URLCONF = 'p12.urls'
+ROOT_URLCONF = 'optiwait.urls'
 
-WSGI_APPLICATION = 'p12.wsgi.application'
+WSGI_APPLICATION = 'optiwait.wsgi.application'
 
 
 # Database

@@ -28,7 +28,7 @@ import pprint
 # }
 
 
-API_KEY = 'AIzaSyD-YI1P-lBIjUhmkhcAvOKKc60q1L1K2wE'
+API_KEY = ''
 URL = 'https://maps.googleapis.com/maps/api/distancematrix/json'
 
 def get_raw_distances(loc, clinics):

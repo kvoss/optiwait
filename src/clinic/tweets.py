@@ -14,10 +14,10 @@ from dateutil.parser import parse
 class TweetError(Exception):
     pass
 
-CONSUMER_KEY = 'lMk5wnSsEqRFqB6wTyQ00TlLk'
-CONSUMER_SECRET ='A0XRy7zkgFej4fnTNqbKLF4QOhIRU6ygIul00JVYGE84BpPsO5'
-OAUTH_TOKEN = '2835226370-1kIFZSqIsw9obeEFPGlkFhj3vwpSLna4aVcrCYK'
-OAUTH_TOKEN_SECRET = 'NfAQTO3S2bQV4t95L6u3L71oZmtbhzjcfT9BXbgsjQ1fZ'
+CONSUMER_KEY = ''
+CONSUMER_SECRET =''
+OAUTH_TOKEN = ''
+OAUTH_TOKEN_SECRET = ''
 
 auth = twitter.oauth.OAuth(OAUTH_TOKEN, OAUTH_TOKEN_SECRET,
                            CONSUMER_KEY, CONSUMER_SECRET)
@@ -47,6 +47,4 @@ def get_update(tt_id):
     mins = Parser(txt).get_minutes()
 
     return (t, mins)
-
-#print get_update('LMCSaskatoon')
 
