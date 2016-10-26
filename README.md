@@ -5,6 +5,8 @@ The estimated waiting time is based on wait time provided by clinics via twitter
 and on the distance to available clinics.
 The web interface and data model are based on Django.
 
+The project was written during Hacking Health hackathon in 2014.
+
 ## Quick start
 
 1. Add "clinic" to your `INSTALLED_APPS` setting:
